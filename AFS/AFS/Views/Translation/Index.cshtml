@@ -1,0 +1,36 @@
+﻿@model AFS.Dtos.TranslationListVm
+@{
+}
+<form class="w-40" asp-action="Index" method="post">
+<div class="tbl-container">
+    <h2>Translations</h2>
+
+    <div class="input-container">
+        <label asp-for="Term" class="w-40">Search   </label>
+        <input type="text" class="input" asp-for="Term">
+    </div>
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Search</button>
+    </div>
+
+    <table>
+        <tr>
+            <th>Text       </th>
+            <th>Elvish Translation</th>
+           
+        </tr>
+        @foreach (var item in Model.TranslationList)
+        {
+            <tr>
+                <td>@item.Text</td>
+                <td>@item.TextTranslation</td>
+            </tr>
+        }
+
+    </table>
+    <div class="input-container">
+        <a href="/Translation/TranslateToElvish" class="btn btn-sec">New Translation</a>
+    </div>
+</div>
+   
+</form>

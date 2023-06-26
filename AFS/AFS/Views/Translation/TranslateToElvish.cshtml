@@ -1,0 +1,31 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model AFS.Models.Translation
+@{
+}
+
+
+<form class="w-40" asp-action="TranslateToElvish" method="post" enctype="multipart/form-data">
+    <h2 class="pb-10">Translate Text to Elvish</h2>
+    <input type="hidden" class="input" asp-for="Id">
+    <div class="input-container">
+        <label asp-for="Text" class="w-40">Text</label>
+        <input type="text" class="input" asp-for="Text">
+    </div>
+    <div class="message-box pd-x-28 error">
+        <span asp-validation-for="Text"> </span>
+    </div>
+
+    <div class="input-container">
+        <label asp-for="Text" class="w-40">Tranlation</label>
+        @Html.DisplayFor(model => model.TextTranslation)
+    </div>
+    
+ 
+
+    <div class="input-container">
+        <button class="btn btn-default" type="submit">Translate</button>
+    </div>
+</form>
+
