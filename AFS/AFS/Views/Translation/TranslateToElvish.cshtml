@@ -21,7 +21,13 @@
         <label asp-for="Text" class="w-40">Tranlation</label>
         @Html.DisplayFor(model => model.TextTranslation)
     </div>
-    
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert mb-1">
+            @TempData["msg"]
+        </div>
+    }
  
 
     <div class="input-container">
