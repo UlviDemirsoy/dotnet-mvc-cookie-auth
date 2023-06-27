@@ -1,5 +1,5 @@
 # Dotnet-mvc-cookie-auth
-Elvish translator with search data table options, user management with MicrosoftIdentity
+Elvish translator using 3rd party api, user management with MicrosoftIdentity
 
 PostgresSql, EFCore 6
 
