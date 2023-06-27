@@ -1,0 +1,38 @@
+name: dockercompose16960345649519200676
+services:
+  afs:
+    build:
+      context: C:\Users\ulvi\Desktop\AFS\AFS
+      dockerfile: AFS/Dockerfile
+    depends_on:
+      afs_db:
+        condition: service_started
+    environment:
+      DB_CONNECTION_STRING: User ID=rick;Password=Ulvi1234!;Host=afs_db;Port=5432;Database=c137;
+    image: senpaicq/afsmvc
+    networks:
+      dev: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5009"
+      protocol: tcp
+  afs_db:
+    container_name: multiverse3
+    environment:
+      POSTGRES_DB: c137
+      POSTGRES_PASSWORD: Ulvi1234!
+      POSTGRES_USER: rick
+    image: postgres:latest
+    networks:
+      dev: null
+    ports:
+    - mode: ingress
+      target: 5432
+      published: "5432"
+      protocol: tcp
+    restart: always
+networks:
+  dev:
+    name: dockercompose16960345649519200676_dev
+    driver: bridge

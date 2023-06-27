@@ -32,7 +32,7 @@ namespace AFS.Tests.Controllers
         }
 
         [Fact]
-        public void TranlationController_Index_ReturnsSucces()
+        public void TranlationController_Index_ShouldReturnsViewResult()
         {
             //Arrange
             var translations = A.Fake<TranslationListVm>();
@@ -47,8 +47,28 @@ namespace AFS.Tests.Controllers
 
             //Assert
 
-            result.Should().BeOfType<IActionResult>();
+            result.Should().BeOfType<ViewResult>();
 
+        }
+
+
+        [Fact]
+        public void TranlationController_TranslateToElvish_ShouldReturnsViewResult()
+        {
+            //Arrange
+            var translations = A.Fake<TranslationListVm>();
+            string searchterm = "";
+            bool paging = false;
+            int currentpage = 0;
+            A.CallTo(() => _translationService.List(searchterm, paging, currentpage)).Returns(translations);
+
+            //Act
+
+            var result = _translationController.TranslateToElvish();
+
+            //Assert
+
+            result.Should().BeOfType<ViewResult>();
 
         }
 

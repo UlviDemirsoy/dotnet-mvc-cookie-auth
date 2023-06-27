@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   afs:
-    image: afs:dev
+    image: senpaicq/afsmvc:dev
     container_name: AFS
     build:
       target: base

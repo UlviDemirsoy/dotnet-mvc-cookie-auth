@@ -1,0 +1,98 @@
+name: dockercompose16960345649519200676
+services:
+  afs:
+    build:
+      context: C:\Users\ulvi\Desktop\AFS\AFS
+      dockerfile: AFS/Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: AFS
+      target: base
+    container_name: AFS
+    depends_on:
+      afs_db:
+        condition: service_started
+    entrypoint:
+    - tail
+    - -f
+    - /dev/null
+    environment:
+      ASPNETCORE_LOGGING__CONSOLE__DISABLECOLORS: "true"
+      DB_CONNECTION_STRING: User ID=rick;Password=Ulvi1234!;Host=afs_db;Port=5432;Database=c137;
+      DOTNET_USE_POLLING_FILE_WATCHER: "1"
+      NUGET_FALLBACK_PACKAGES: /root/.nuget/fallbackpackages
+    image: afs:dev
+    labels:
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath /root/.nuget/packages
+        --additionalProbingPath /root/.nuget/fallbackpackages  "/app/bin/Debug/net6.0/AFS.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: /bin/sh -c "if PID=$$(pidof
+        dotnet); then kill $$PID; fi"
+      com.microsoft.visualstudio.debuggee.program: dotnet
+      com.microsoft.visualstudio.debuggee.workingdirectory: /app
+    networks:
+      dev: null
+    ports:
+    - mode: ingress
+      target: 80
+      published: "5009"
+      protocol: tcp
+    tty: true
+    volumes:
+    - type: bind
+      source: C:\Users\ulvi\Desktop\AFS\AFS\AFS
+      target: /app
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\ulvi\Desktop\AFS\AFS
+      target: /src
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\ulvi\vsdbg\vs2017u5
+      target: /remote_debugger
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\ulvi\.nuget\packages\
+      target: /root/.nuget/packages
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Program Files (x86)\Microsoft Visual Studio\Shared\NuGetPackages
+      target: /root/.nuget/fallbackpackages
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\ulvi\AppData\Roaming/ASP.NET/Https
+      target: /root/.aspnet/https
+      read_only: true
+      bind:
+        create_host_path: true
+    - type: bind
+      source: C:\Users\ulvi\AppData\Roaming/Microsoft/UserSecrets
+      target: /root/.microsoft/usersecrets
+      read_only: true
+      bind:
+        create_host_path: true
+  afs_db:
+    container_name: multiverse3
+    environment:
+      POSTGRES_DB: c137
+      POSTGRES_PASSWORD: Ulvi1234!
+      POSTGRES_USER: rick
+    image: postgres:latest
+    networks:
+      dev: null
+    ports:
+    - mode: ingress
+      target: 5432
+      published: "5432"
+      protocol: tcp
+    restart: always
+networks:
+  dev:
+    name: dockercompose16960345649519200676_dev
+    driver: bridge
