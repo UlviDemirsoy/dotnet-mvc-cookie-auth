@@ -5,7 +5,7 @@ Unit Testing with FakeItEasy, FluentAssertions, Xunit
 
 To Run the Application
 
-*docker compose up
+* docker compose up
 
 
 
