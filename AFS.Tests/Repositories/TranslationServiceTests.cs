@@ -59,7 +59,7 @@ namespace AFS.Tests.Repositories
 
 
         [Fact]
-        public async void TranslationService_GetById_ReturnsTranslation()
+        public async void TranslationService_SuccessfulGetById_ReturnsTranslation()
         {
             //Arrange
             var id = 1;
@@ -81,6 +81,23 @@ namespace AFS.Tests.Repositories
             result.Should().BeOfType<Translation>();
         }
 
+
+        [Fact]
+        public async void TranslationService_FailedGetById_ReturnsTranslation()
+        {
+            //Arrange
+            var id = 1;
+            var dbContext = await GetDbContext();
+            var translationRepository = new TranslationService(dbContext);
+           
+
+            //Act
+            var result = translationRepository.GetById(id);
+
+            //Assert
+            result.Should().BeNull();
+        }
+
         [Fact]
         public async void TranslationService_List_ReturnsList()
         {
@@ -95,5 +112,8 @@ namespace AFS.Tests.Repositories
             result.Should().NotBeNull();
             result.Should().BeOfType<TranslationListVm>();
         }
+
+
+       
     }
 }
